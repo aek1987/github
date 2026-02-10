@@ -25,7 +25,7 @@ pipeline {
         stage('Generate Cucumber Report') {
             steps {
                 cucumber reportTitle: 'My Cucumber Report',
-                         fileIncludePattern: 'target/cucumber-report.json'
+                         fileIncludePattern: 'target/example-report.json.json'
             }
         }
     }
@@ -35,7 +35,7 @@ pipeline {
             // Lire les tests JUnit
             script {
                 junit allowEmptyResults: true,
-                      testResults: 'target/surefire-reports/*.xml'
+                      testResults: 'target/example-report/*.xml'
             }
         }
 
