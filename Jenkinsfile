@@ -14,7 +14,7 @@ pipeline {
                 bat 'mvn package'
             }
         }
-
+//**//
         stage('Archive JAR') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar',
