@@ -17,8 +17,17 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                junit testResults: 'target/surefire-reports/*.xml',
+                      allowEmptyResults: true
             }
+        }
+
+        stage('archive') {
+            steps {
+                bat 'mvn package'
+                archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
+            }
+           
         }
     }
 
