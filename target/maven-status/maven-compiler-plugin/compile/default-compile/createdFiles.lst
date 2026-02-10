@@ -1,0 +1,3 @@
+com\example\exception\NoSquareException.class
+com\example\service\MatrixMathematics.class
+com\example\model\Matrix.class
