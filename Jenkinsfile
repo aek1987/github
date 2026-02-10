@@ -17,7 +17,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                junit testResults: 'target/surefire-reports/*.xml',
+                junit testResults: 'target/cucumber-report/*.xml',
                       allowEmptyResults: true
             }
         }
