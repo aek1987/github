@@ -29,20 +29,5 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // JUnit doit être exécuté dans steps/script pour éviter MissingContextVariableException
-            script {
-                junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
-            }
-        }
-
-        success {
-            echo '✅ BUILD SUCCESS'
-        }
-
-        failure {
-            echo '❌ BUILD FAILED'
-        }
-    }
+   
 }
