@@ -11,7 +11,6 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                // Compile + test
                 bat 'mvn package'
             }
         }
@@ -32,9 +31,10 @@ pipeline {
 
     post {
         always {
-            // JUnit report
-            junit allowEmptyResults: true,
-                  testResults: 'target/surefire-reports/*.xml'
+            // JUnit doit être exécuté dans steps/script pour éviter MissingContextVariableException
+            script {
+                junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
+            }
         }
 
         success {
