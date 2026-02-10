@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'   // Nom configuré dans Jenkins (Global Tool Configuration)
-        jdk 'JDK17'     // Optionnel si déjà dans PATH
-    }
-
     stages {
 
         stage('Clean') {
