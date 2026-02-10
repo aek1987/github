@@ -30,11 +30,12 @@ pipeline {
            
         }
 
-        stage('Generate HTML report') {
-        cucumber reportTitle: 'My report',
-       fileIncludePattern: 'target/exemple-report.json'
-              
-             }
+         stage('Generate Cucumber Report') {
+            steps {
+                cucumber reportTitle: 'My Cucumber Report',
+                         fileIncludePattern: 'target/cucumber-report.json'
+            }
+        }
     }
 
     post {
