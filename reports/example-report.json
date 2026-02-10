@@ -11,7 +11,7 @@
         "steps": [
           {
             "result": {
-              "duration": 2000400,
+              "duration": 2017000,
               "status": "passed"
             },
             "line": 3,
@@ -24,7 +24,7 @@
         ]
       },
       {
-        "start_timestamp": "2026-02-10T08:58:18.388Z",
+        "start_timestamp": "2026-02-10T10:39:04.146Z",
         "line": 5,
         "name": "Determinant",
         "description": "",
@@ -34,7 +34,7 @@
         "steps": [
           {
             "result": {
-              "duration": 1000600,
+              "duration": 1015300,
               "status": "passed"
             },
             "line": 6,
@@ -76,7 +76,6 @@
           },
           {
             "result": {
-              "duration": 1000300,
               "status": "passed"
             },
             "line": 11,
@@ -103,7 +102,7 @@
         "steps": [
           {
             "result": {
-              "duration": 999400,
+              "duration": 999100,
               "status": "passed"
             },
             "line": 3,
@@ -116,7 +115,7 @@
         ]
       },
       {
-        "start_timestamp": "2026-02-10T08:58:18.443Z",
+        "start_timestamp": "2026-02-10T10:39:04.196Z",
         "line": 14,
         "name": "Transpose",
         "description": "",
@@ -163,7 +162,7 @@
           },
           {
             "result": {
-              "duration": 1001000,
+              "duration": 1037700,
               "status": "passed"
             },
             "line": 20,
@@ -219,7 +218,7 @@
         ]
       },
       {
-        "start_timestamp": "2026-02-10T08:58:18.448Z",
+        "start_timestamp": "2026-02-10T10:39:04.201Z",
         "line": 26,
         "name": "Inverse",
         "description": "",
@@ -300,6 +299,7 @@
         "steps": [
           {
             "result": {
+              "duration": 1005300,
               "status": "passed"
             },
             "line": 3,
@@ -312,7 +312,7 @@
         ]
       },
       {
-        "start_timestamp": "2026-02-10T08:58:18.451Z",
+        "start_timestamp": "2026-02-10T10:39:04.204Z",
         "line": 37,
         "name": "Cofactor",
         "description": "",
