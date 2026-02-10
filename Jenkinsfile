@@ -8,7 +8,7 @@ pipeline {
                 bat 'mvn clean'
             }
         }
-/******/
+
         stage('Build & Test') {
             steps {
                 bat 'mvn package'
@@ -17,7 +17,8 @@ pipeline {
 
         stage('Archive JAR') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/*.jar',
+                                 allowEmptyArchive: true
             }
         }
 
@@ -27,16 +28,23 @@ pipeline {
                          fileIncludePattern: 'target/cucumber-report.json'
             }
         }
-    
-
-
-
-
-
-
-    
-    
     }
 
-   
+    post {
+        always {
+            // Lire les tests JUnit
+            script {
+                junit allowEmptyResults: true,
+                      testResults: 'target/surefire-reports/*.xml'
+            }
+        }
+
+        success {
+            echo '✅ BUILD SUCCESS'
+        }
+
+        failure {
+            echo '❌ BUILD FAILED'
+        }
+    }
 }
