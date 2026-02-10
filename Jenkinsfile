@@ -30,21 +30,5 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Lire les tests JUnit Maven (pas le JSON Cucumber)
-            script {
-                junit allowEmptyResults: true,
-                      testResults: 'target/surefire-reports/*.xml'
-            }
-        }
-
-        success {
-            echo '✅ BUILD SUCCESS'
-        }
-
-        failure {
-            echo '❌ BUILD FAILED'
-        }
-    }
+    
 }
