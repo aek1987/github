@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-   /*     stage('Archive JAR') {
+      stage('Archive JAR') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar',
                                  allowEmptyArchive: true
@@ -27,7 +27,7 @@ pipeline {
                 cucumber reportTitle: 'My Cucumber Report',
                          fileIncludePattern: 'target/example-report.json'
             }
-        }*/
+        }
     }
 
     
