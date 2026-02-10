@@ -11,36 +11,41 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn package -DskipTests'
+                bat 'mvn compile'
             }
         }
 
-        stage('Test') {
+        stage('Test (Cucumber)') {
             steps {
-                junit testResults: 'target/surefire-reports/*.xml',
-                      allowEmptyResults: true
+                bat 'mvn test'
             }
         }
 
-        stage('archive') {
+        stage('Archive JAR') {
             steps {
                 bat 'mvn package'
                 archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             }
-           
         }
 
-        stage('Generate HTML report') {
-        cucumber reportTitle: 'My report',
-                fileIncludePattern: 'target/exemple-report.json',
-              
-    }
+        stage('Generate Cucumber Report') {
+            steps {
+                cucumber reportTitle: 'My Cucumber Report',
+                         fileIncludePattern: 'target/cucumber-report.json'
+            }
+        }
     }
 
     post {
+        always {
+            junit allowEmptyResults: true,
+                  testResults: 'target/surefire-reports/*.xml'
+        }
+
         success {
             echo '✅ BUILD SUCCESS'
         }
+
         failure {
             echo '❌ BUILD FAILED'
         }
