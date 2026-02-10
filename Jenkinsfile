@@ -29,6 +29,12 @@ pipeline {
             }
            
         }
+
+        stage('Generate HTML report') {
+        cucumber reportTitle: 'My report',
+                fileIncludePattern: 'target/exemple-report.json',
+              
+    }
     }
 
     post {
