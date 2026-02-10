@@ -32,10 +32,10 @@ pipeline {
 
     post {
         always {
-            // Lire les tests JUnit
+            // Lire les tests JUnit Maven (pas le JSON Cucumber)
             script {
                 junit allowEmptyResults: true,
-                      testResults: 'target/example-report/*.xml'
+                      testResults: 'target/surefire-reports/*.xml'
             }
         }
 
