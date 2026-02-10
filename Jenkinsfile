@@ -9,28 +9,20 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Test') {
             steps {
+                // Compile + test
                 bat 'mvn package'
             }
         }
 
-        stage('Test') {
+        stage('Archive JAR') {
             steps {
-                junit testResults: 'target/cucumber-report/*.xml',
-                      allowEmptyResults: true
-            }
-        }
-
-        stage('archive') {
-            steps {
-                bat 'mvn package'
                 archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             }
-           
         }
 
-         stage('Generate Cucumber Report') {
+        stage('Generate Cucumber Report') {
             steps {
                 cucumber reportTitle: 'My Cucumber Report',
                          fileIncludePattern: 'target/cucumber-report.json'
@@ -39,9 +31,16 @@ pipeline {
     }
 
     post {
+        always {
+            // JUnit report
+            junit allowEmptyResults: true,
+                  testResults: 'target/surefire-reports/*.xml'
+        }
+
         success {
             echo '✅ BUILD SUCCESS'
         }
+
         failure {
             echo '❌ BUILD FAILED'
         }
