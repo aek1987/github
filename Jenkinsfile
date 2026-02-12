@@ -5,6 +5,8 @@ pipeline {
         VERSION = "v1.2.0"  // Version définie ici
     }
 
+
+
     stages {
 
         stage('Clean first') {
