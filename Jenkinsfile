@@ -65,8 +65,9 @@ stage('Create Release Tag') {
             }
 
             bat """
-curl -X POST https://api.github.com/repos/issadlounis/untitled/releases ^
--H "Authorization: Bearer TOKEN" ^
+curl -X POST https://github.com/aek1987/github/releases ^
+
+-H "Authorization: Bearer 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" ^
 -H "Accept: application/vnd.github+json" ^
 -H "Content-Type: application/json" ^
 -d "{\\"tag_name\\":\\"v${version}\\",\\"name\\":\\"Release v${version}\\",\\"body\\":\\"Production release\\",\\"draft\\":false,\\"prerelease\\":false}"
