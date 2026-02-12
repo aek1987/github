@@ -55,5 +55,19 @@ pipeline {
                 }
             }
         }
+
+ stage('Create Git Tag') {
+            steps {
+              bat """
+   curl -X POST https://api.github.com/repos/issadlounis/untitled/releases ^
+   -H "Authorization: Bearer TOKEN" ^
+   -H "Accept: application/vnd.github+json" ^
+   -H "Content-Type: application/json" ^
+   -d "{\\"tag_name\\":\\"v%VERSION%\\",\\"name\\":\\"Release v%VERSION%\\",\\"body\\":\\"Production release\\",\\"draft\\":false,\\"prerelease\\":false}"
+"""
+
+            }
+        }
+        
     }
 }
