@@ -1,10 +1,15 @@
 pipeline {
+
+        environment {
+        VERSION = "v1.0.0"  // Définir ici la version ou la récupérer dynamiquement
+    }
     
     stages {
 
         stage('Clean first') {
             steps {
                 bat 'mvn clean'
+                echo '${version}'
             }
         }
 
@@ -44,18 +49,18 @@ pipeline {
 
 
    stage('Create Git Tag') {
-    environment {
-        VERSION = "v1.0.0"  // Définir ici la version ou la récupérer dynamiquement
-    }
+  
+
     steps {
         script {
          // Créer le tag local
-            bat "git tag -a ${version} -m \"Release ${version}\""
+            bat "git tag -a ${version} -m \"Release ${}\""
 
-            // Pousser le tag sur GitHub
+            // Pousser le tag sur GitHubgit 
             bat "git push origin ${version}"
         }
     }
 }}}
 
  
+version
