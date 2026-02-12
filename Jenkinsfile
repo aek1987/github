@@ -1,6 +1,5 @@
 pipeline {
-    agent any
-
+    
     stages {
 
         stage('Clean first') {
@@ -44,17 +43,19 @@ pipeline {
     }
 
 
-    stage('Create Git Tag') {
-            steps {
-                script {
-                    // Créer un tag local
-                    bat "git tag -a $VERSION -m 'Release $VERSION'"
+   stage('Create Git Tag') {
+    environment {
+        VERSION = "v1.0.0"  // Définir ici la version ou la récupérer dynamiquement
+    }
+    steps {
+        script {
+            // Créer un tag local jjjjj
+            bat "git tag -a %VERSION% -m \"Release %VERSION%\""
 
-                    // Pousser le tag vers GitHub
-                    bat "git push origin $VERSION"
-                }
-            }
+            // Pousser le tag vers GitHub
+            bat "git push origin %VERSION%"
         }
-}}
+    }
+}}}
 
  
