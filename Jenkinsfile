@@ -35,7 +35,7 @@ pipeline {
     post {
         success {
             bat '''
-            curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"Build SUCCESS 🚀\\"}" https://hooks.slack.com/services/NEW/WEBHOOK/URL
+            curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"Build SUCCESS 🚀\\"}" 
             '''
         }
         failure {
