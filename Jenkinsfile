@@ -8,7 +8,7 @@ pipeline {
                 bat 'mvn clean'
             }
         }
-///********dlllllcccccffffffl**********//
+
         stage('Build & Test') {
             steps {
                 bat 'mvn package'
@@ -55,7 +55,6 @@ pipeline {
                 }
             }
         }
-}
+}}
 
  
-}}
