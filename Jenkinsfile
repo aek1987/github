@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "v1.30"  // Version définie ici
+        VERSION = "v1.40"  // Version définie ici
     }
 
 
