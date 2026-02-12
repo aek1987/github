@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "v1.40"  // Version définie ici
+        VERSION = "v1.5"  // Version définie ici
     }
 
 
@@ -71,7 +71,7 @@ curl -X POST https://github.com/aek1987/github/releases ^
 -H "Authorization: Bearer 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" ^
 -H "Accept: application/vnd.github+json" ^
 -H "Content-Type: application/json" ^
--d "{\\"tag_name\\":\\"v${VERSION}\\",\\"name\\":\\"Release v${VERSION}\\",\\"body\\":\\"Production release\\",\\"draft\\":false,\\"prerelease\\":false}"
+-d "{\\"tag_name\\":\\"%{VERSION}\\",\\"name\\":\\"Release v%{VERSION}\\",\\"body\\":\\"Production release\\",\\"draft\\":false,\\"prerelease\\":false}"
 """
         }
     }
