@@ -8,7 +8,7 @@ pipeline {
                 bat 'mvn clean'
             }
         }
-///********dllllll**********//
+///********dlllllffffffl**********//
         stage('Build & Test') {
             steps {
                 bat 'mvn package'
@@ -41,6 +41,20 @@ pipeline {
         %SLACK_WEBHOOK%
         """
     }
+
+
+
+    stage('Create Git Tag') {
+            steps {
+                script {
+                    // Créer un tag local
+                    sh "git tag -a $VERSION -m 'Release $VERSION'"
+
+                    // Pousser le tag vers GitHub
+                    sh "git push origin $VERSION"
+                }
+            }
+        }
 }
 
  
