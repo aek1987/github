@@ -49,11 +49,11 @@ pipeline {
     }
     steps {
         script {
-            // Créer un tag local jjjjj
-            bat "git tag -a %VERSION% -m \"Release %VERSION%\""
+         // Créer le tag local
+            bat "git tag -a ${version} -m \"Release ${version}\""
 
-            // Pousser le tag vers GitHub
-            bat "git push origin %VERSION%"
+            // Pousser le tag sur GitHub
+            bat "git push origin ${version}"
         }
     }
 }}}
