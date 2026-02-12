@@ -30,15 +30,18 @@ pipeline {
         }
 
      
-    }
+    
 
- post {
-        success {
-            bat """
-            curl -X POST -H "Content-type: application/json" ^
-            --data "{\\"text\\":\\"Build SUCCESS 🚀 ${env.JOB_NAME} #${env.BUILD_NUMBER}\\"}" ^
-            %SLACK_WEBHOOK%
-            """
-        }
+    stage('slack') {
+    steps {
+        bat """
+        curl -X POST ^
+        -H "Content-type: application/json" ^
+        --data "{\\"text\\":\\"Deploying!\\"}" ^
+        %SLACK_WEBHOOK%
+        """
     }
 }
+
+ 
+}}
