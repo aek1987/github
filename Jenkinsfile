@@ -8,7 +8,7 @@ pipeline {
                 bat 'mvn clean'
             }
         }
-///********dlllllffffffl**********//
+///********dlllllcccccffffffl**********//
         stage('Build & Test') {
             steps {
                 bat 'mvn package'
@@ -41,7 +41,7 @@ pipeline {
         %SLACK_WEBHOOK%
         """
     }
-
+    }
 
 
     stage('Create Git Tag') {
