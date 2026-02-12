@@ -32,16 +32,13 @@ pipeline {
      
     }
 
-    post {
+ post {
         success {
-            bat '''
-            curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"Build SUCCESS 🚀\\"}" 
-            '''
+            bat """
+            curl -X POST -H "Content-type: application/json" ^
+            --data "{\\"text\\":\\"Build SUCCESS 🚀 ${env.JOB_NAME} #${env.BUILD_NUMBER}\\"}" ^
+            %SLACK_WEBHOOK%
+            """
         }
-        failure {
-            bat '''
-            curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"Build FAILED ❌\\"}" https://hooks.slack.com/services/NEW/WEBHOOK/URL
-            '''
-        }
-    }  
+    }
 }
