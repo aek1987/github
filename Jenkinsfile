@@ -1,15 +1,16 @@
 pipeline {
-agent any
-        environment {
-        VERSION = "v1.0.0"  // Définir ici la version ou la récupérer dynamiquement
-             }
-    
+    agent any
+
+    environment {
+        VERSION = "v1.0.0"  // Version définie ici
+    }
+
     stages {
 
         stage('Clean first') {
             steps {
                 bat 'mvn clean'
-                echo '${version}'
+                echo "${VERSION}"
             }
         }
 
@@ -19,10 +20,9 @@ agent any
             }
         }
 
-      stage('Archive JAR') {
+        stage('Archive JAR') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar',
-                                 allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             }
         }
 
@@ -33,34 +33,27 @@ agent any
             }
         }
 
-     
-    
+        stage('slack') {
+            steps {
+                bat """
+                curl -X POST ^
+                -H "Content-type: application/json" ^
+                --data "{\\"text\\":\\"Deploying! Version ${VERSION}\\"}" ^
+                %SLACK_WEBHOOK%
+                """
+            }
+        }
 
-    stage('slack') {
-    steps {
-        bat """
-        curl -X POST ^
-        -H "Content-type: application/json" ^
-        --data "{\\"text\\":\\"Deploying!\\"}" ^
-        %SLACK_WEBHOOK%
-        """
-    }
-    }
+        stage('Create Git Tag') {
+            steps {
+                script {
+                    // Créer le tag local
+                    bat "git tag -a ${VERSION} -m \"Release ${VERSION}\""
 
-
-   stage('Create Git Tag') {
-  
-
-    steps {
-        script {
-         // Créer le tag local
-            bat "git tag -a ${version} -m \"Release ${}\""
-
-            // Pousser le tag sur GitHubgit 
-            bat "git push origin ${version}"
+                    // Pousser le tag vers GitHub
+                    bat "git push origin ${VERSION}"
+                }
+            }
         }
     }
-}}}
-
- 
-version
+}
