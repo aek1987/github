@@ -41,12 +41,25 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
+            <configuration>
+                <release>21</release>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+  <distributionManagement>
+  <repository>
+    <id>nexus</id> <!-- doit correspondre au <id> du settings.xml -->
+    <name>Nexus Releases</name>
+    <url>http://localhost:8081/repository/maven-releases/</url>
+  </repository>
+</distributionManagement>
 
-    <distributionManagement>
-        <repository>
-            <id>myMavenRepo.write</id>
-            <url>https://mymavenrepo.com/repo/kzVZIbBzVwZ1VHqbQYMA/</url>
-        </repository>
-    </distributionManagement>
 
 </project>
