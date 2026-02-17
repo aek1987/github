@@ -33,7 +33,7 @@ pipeline {
             }
         }
 
-        stage('slack') {
+    /*    stage('slack') {
             steps {
                 bat """
                 curl -X POST ^
@@ -42,7 +42,7 @@ pipeline {
                 %SLACK_WEBHOOK%
                 """
             }
-        }
+        }*/
 
         stage('Creatdde Gi  sdsdt Tag') {
             steps {
