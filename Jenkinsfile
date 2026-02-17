@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage('slack') {
+    /*    stage('slack') {
             steps {
                 bat """
                 curl -X POST ^
@@ -44,12 +44,12 @@ pipeline {
                 %SLACK_WEBHOOK%
                 """
             }
-        }
+        }*/
 
         stage('Create Git Tag') {
             steps {
                 script {
-                    // Créer le tag local
+                    // Créer le tag local ffff
                     bat "git tag -a ${VERSION} -m \"Release ${VERSION}\""
 
                     // Pousser le tag vers GitHub
