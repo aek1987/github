@@ -1,11 +1,16 @@
 pipeline {
     agent any
 
+    environment {
+        VERSION = "v1.0.0"  // Version définie ici
+    }
+
     stages {
 
-        stage('Clean') {
+        stage('Clean first') {
             steps {
                 bat 'mvn clean'
+                echo "${VERSION}"
             }
         }
 
@@ -15,10 +20,9 @@ pipeline {
             }
         }
 
-      stage('Archive JAR') {
+        stage('Archive JAR') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar',
-                                 allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             }
         }
 
@@ -29,19 +33,41 @@ pipeline {
             }
         }
 
-     
-    }
+        stage('slack') {
+            steps {
+                bat """
+                curl -X POST ^
+                -H "Content-type: application/json" ^
+                --data "{\\"text\\":\\"Deploying! Version ${VERSION}\\"}" ^
+                %SLACK_WEBHOOK%
+                """
+            }
+        }
 
-    post {
-        success {
-            bat '''
-            curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"Build SUCCESS 🚀\\"}" https://hooks.slack.com/services/NEW/WEBHOOK/URL
-            '''
+        stage('Creatdde Gi  sdsdt Tag') {
+            steps {
+                script {
+                    // Créer le tag local
+                    bat "git tag -a ${VERSION} -m \"Release ${VERSION}\""
+
+                    // Pousser le tag vers GitHub
+                    bat "git push origin ${VERSION}"
+                }
+            }
         }
-        failure {
-            bat '''
-            curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"Build FAILED ❌\\"}" https://hooks.slack.com/services/NEW/WEBHOOK/URL
-            '''
+
+ stage('Create ggggGit Tag') {
+            steps {
+              bat """
+   curl -X POST https://api.github.com/repos/issadlounis/untitled/releases ^
+   -H "Authorization: Bearer TOKEN" ^
+   -H "Accept: application/vnd.github+json" ^
+   -H "Content-Type: application/json" ^
+   -d "{\\"tag_name\\":\\"v%VERSION%\\",\\"name\\":\\"Release v%VERSION%\\",\\"body\\":\\"Production release\\",\\"draft\\":false,\\"prerelease\\":false}"
+"""
+
+            }
         }
-    }  
+        
+    }
 }
