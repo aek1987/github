@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "v1.1.0"  // Version définie ici
+        VERSION = "v1.2.0"  // Version définie ici
     }
 
     stages {
@@ -44,7 +44,7 @@ pipeline {
             }
         }*/
 
-        stage('Creatdde Gi  sdsdt Tag') {
+        stage('Creatdde Git Tag') {
             steps {
                 script {
                     // Créer le tag local
@@ -56,7 +56,7 @@ pipeline {
             }
         }
 
- stage('Create ggggGit Tag') {
+ stage('Create Git Tag') {
             steps {
               bat """
    curl -X POST https://api.github.com/repos/issadlounis/untitled/releases ^
