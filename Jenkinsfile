@@ -63,18 +63,22 @@ pipeline {
 
 stage('Create GitHub Release') {
     steps {
-        script {
-                        
-            bat """
-            curl -X POST https://api.github.com/repos/aek1987/github/releases ^
-            -H "Authorization: Bearer ${githubToken}" ^
-            -H "Accept: application/vnd.github+json" ^
-            -H "Content-Type: application/json" ^
-            -d "{\\"tag_name\\":\\"${VERSION}\\",\\"name\\":\\"Release ${VERSION}\\",\\"body\\":\\"Production release\\",\\"draft\\":false,\\"prerelease\\":false}"
-            """
+        // Utiliser le token stocké dans Jenkins Credentials
+        withCredentials([string(credentialsId: 'token', variable: 'GITHUB_TOKEN')]) {
+            script {
+                // Créer la release sur GitHub via l'API
+                bat """
+                curl -X POST https://api.github.com/repos/aek1987/github/releases ^
+                -H "Authorization: Bearer %GITHUB_TOKEN%" ^
+                -H "Accept: application/vnd.github+json" ^
+                -H "Content-Type: application/json" ^
+                -d "{\\"tag_name\\":\\"${VERSION}\\",\\"name\\":\\"Release ${VERSION}\\",\\"body\\":\\"Production release\\",\\"draft\\":false,\\"prerelease\\":false}"
+                """
+            }
         }
     }
 }
+
 
         
     }
