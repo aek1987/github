@@ -64,7 +64,7 @@ stage('Create GitHub Release') {
         script {
                         
             bat """
-            curl -X POST https://api.github.com/repos/issadlounis/untitled/releases ^
+            curl -X POST https://api.github.com/repos/aek1987/github/releases ^
             -H "Authorization: Bearer ${githubToken}" ^
             -H "Accept: application/vnd.github+json" ^
             -H "Content-Type: application/json" ^
