@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "v1.12.0"  // Version définie ici       
+        VERSION = "v1.13.0"  // Version définie ici       
     githubToken = credentials('token')  // Jenkins Credential
 
 
@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-    /*    stage('slack') {
+    /*    stage('slack') { ghghghghg
             steps {
                 bat """
                 curl -X POST ^
