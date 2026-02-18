@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "v1.20.0"  // Version définie ici       
+        VERSION = "v1.21.0"  // Version définie ici       
     githubToken = credentials('token')  // Jenkins Credential
 
 
