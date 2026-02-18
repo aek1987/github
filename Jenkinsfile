@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "v1.11.0"  // Version définie ici       
+        VERSION = "v1.12.0"  // Version définie ici       
     githubToken = credentials('token')  // Jenkins Credential
 
 
@@ -64,7 +64,7 @@ stage('Create GitHub Release') {
         script {
                         
             bat """
-            curl -X POST https://api.github.com/repos/aek1987/github/releases ^
+            curl -X POST https://api.github.com/aek1987/github/releases ^
             -H "Authorization: Bearer ${githubToken}" ^
             -H "Accept: application/vnd.github+json" ^
             -H "Content-Type: application/json" ^
